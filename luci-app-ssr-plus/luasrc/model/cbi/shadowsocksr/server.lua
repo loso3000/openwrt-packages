@@ -1,13 +1,8 @@
 -- Copyright (C) 2017 yushi studio <ywb94@qq.com>
 -- Licensed to the public under the GNU General Public License v3.
-
+require "luci.http"
+require "luci.dispatcher"
 local m, sec, o
-local shadowsocksr = "shadowsocksr"
-local uci = luci.model.uci.cursor()
-
-
-m = Map(shadowsocksr)
-
 local encrypt_methods = {
 	"table",
 	"rc4",
@@ -30,7 +25,7 @@ local encrypt_methods = {
 	"seed-cfb",
 	"salsa20",
 	"chacha20",
-	"chacha20-ietf",
+	"chacha20-ietf"
 }
 
 local protocol = {
@@ -39,7 +34,7 @@ local protocol = {
 	"auth_sha1_v4",
 	"auth_aes128_sha1",
 	"auth_aes128_md5",
-	"auth_chain_a",
+	"auth_chain_a"
 }
 
 obfs = {
@@ -48,9 +43,10 @@ obfs = {
 	"http_post",
 	"random_head",
 	"tls1.2_ticket_auth",
-	"tls1.2_ticket_fastauth",
+	"tls1.2_ticket_fastauth"
 }
 
+m = Map("shadowsocksr")
 -- [[ Global Setting ]]--
 sec = m:section(TypedSection, "server_global", translate("Global Setting"))
 sec.anonymous = true
